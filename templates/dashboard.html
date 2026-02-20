@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Shield Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #dff8f0; /* mint-green background */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* HEADER - same height as index.html */
+.top-header {
+    background-color: #c7f9e6; /* pastel mint */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1rem 2rem; /* match index.html */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header .logo {
+    font-size: 1.8rem; /* match index.html */
+    font-weight: bold;
+    color: #055c4a; /* dark mint green */
+}
+
+.top-header nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: 500;
+    color: #333;
+}
+
+.top-header nav a:hover {
+    color: #056d54;
+}
+
+/* Module Cards */
+.module-card {
+    border-radius: 12px;
+    padding: 50px 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    color: #333;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fcfcfc; /* soft mint card background */
+}
+
+.module-card img {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+.module-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #056d54;
+}
+.module-steps { margin-top: 10px; line-height: 1.5; } /* Pastel backgrounds for modules */ #text-module { background-color: #dff6ff; /* light pastel blue */ } #image-module { background-color: #e3fff6; /* pastel mint */ } #video-module { background-color: #fff8e7; /* soft pastel orange */ }
+/* Verdict */
+.verdict-real { color: #198754; font-weight: bold; }
+.verdict-fake { color: #dc3545; font-weight: bold; }
+
+/* FOOTER - same height as index.html */
+footer {
+    text-align: center;
+    padding: 1rem 2rem; /* match index.html */
+    margin-top: auto;
+    background-color: #055c4a;
+    color: white;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.btn {
+    min-width: 180px;
+}
+</style>
+
+
+</head>
+<body>
+
+<!-- Top Header -->
+<div class="top-header">
+    <div class="logo">🛡 AI Shield</div>
+    <nav>
+        <a href="#text-module">Text</a>
+        <a href="#image-module">Image</a>
+        <a href="#video-module">Video</a>
+        <!-- Redirect to index.html on logout -->
+        <a href="{{ url_for('logout') }}" class="btn btn-sm btn-outline-danger">Logout</a>
+
+    </nav>
+</div>
+
+
+<div class="container my-5">
+
+    <!-- Text Module Card -->
+    <div class="module-card" id="text-module">
+        <img src="{{ url_for('static', filename='images/text.png') }}" alt="Text Module Icon">
+        <h3 class="module-title">Text Scam Detector</h3>
+        <p>Analyze suspicious messages, emails, or social media text for scams and phishing attempts.</p>
+        <div class="module-steps">
+            <strong>Steps:</strong>
+            <ol>
+                <li>Paste any suspicious text.</li>
+                <li>Click "Analyze Text".</li>
+                <li>View whether it is Scam or Safe.</li>
+            </ol>
+        </div>
+        <a href="/text" target="_blank" class="btn btn-primary mt-3" style="background-color:#2c34cd;">Go to Text Module</a>
+    </div>
+
+    <!-- Image Module Card -->
+   <div class="module-card" id="image-module">
+    <img src="{{ url_for('static', filename='images/iimage.png') }}" alt="Image Module Icon">
+    <h3 class="module-title">Image Deepfake Detector</h3>
+    <p>Detect manipulated or deepfake images to ensure authenticity before trusting or sharing.</p>
+    <div class="module-steps">
+        <strong>Steps:</strong>
+        <ol>
+            <li>Upload any image you want to verify.</li>
+            <li>AI analyzes the image for deepfake manipulation.</li>
+            <li>View results instantly and see if it’s Real or Fake.</li>
+        </ol>
+    </div>
+    <a href="/image" target="_blank" class="btn mt-3" style="background-color:#10aeda; color: white;">Go to Image Module</a>
+</div>
+
+    <!-- Video Module Card -->
+   <div class="module-card" id="video-module">
+    <img src="{{ url_for('static', filename='images/video.png') }}" alt="Video Module Icon">
+    <h3 class="module-title">Video Deepfake Detector</h3>
+    <p>Verify videos for deepfake content and prevent misinformation online.</p>
+    <div class="module-steps">
+        <strong>Steps:</strong>
+        <ol>
+            <li>Upload any video you want to verify.</li>
+            <li>AI analyzes the video for deepfake manipulation.</li>
+            <li>View results instantly and see if it’s Real or Fake.</li>
+        </ol>
+    </div>
+    <a href="/video" target="_blank" class="btn mt-3" style="background-color:#e87314; color: white;">Go to Video Module</a>
+</div>
+
+<footer>
+    &copy; 2026 AI Shield | Deepfake & Scam Protection | FYP Project
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

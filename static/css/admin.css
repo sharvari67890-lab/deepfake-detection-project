@@ -1,0 +1,97 @@
+/* General Body */
+body {
+    background-color: #e6f9f1; /* Mint green background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #34d399; /* Mint green header */
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 15px 15px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+    font-weight: 600;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* Cards on Dashboard */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.card h4 {
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: #10b981;
+}
+
+.card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #10b981;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #059669;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #d1fae5;
+}
+
+table th {
+    background-color: #a7f3d0;
+    color: #065f46;
+    font-weight: 600;
+}
+
+table tr:hover {
+    background-color: #d1fae5;
+}
+
+.btn-delete {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.35rem 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background-color: #b91c1c;
+}

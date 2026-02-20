@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media History - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/module.css') }}">
+</head>
+<body style="background-color:#f0f4f8;">
+
+<div class="container my-5">
+    <h2 class="mb-4 text-center">Uploaded Media History</h2>
+
+    {% if media %}
+    <div class="table-responsive shadow-sm bg-white rounded p-3">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Filename</th>
+                    <th>Type</th>
+                    <th>Verdict</th>
+                    <th>Fake %</th>
+                    <th>Real %</th>
+                    <th>Uploaded At</th>
+                    <th>Preview</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in media %}
+                <tr>
+                    <td>{{ m[0] }}</td>
+                    <td>{{ m[1] }}</td>
+                    <td>{{ m[2] }}</td>
+                    <td>
+                        <span class="badge 
+                        {% if m[3] == 'Fake (Deepfake)' or m[3] == 'Fake (Scam)' %}bg-danger
+                        {% elif m[3] == 'Suspicious' %}bg-warning text-dark
+                        {% else %}bg-success{% endif %}">
+                            {{ m[3] }}
+                        </span>
+                    </td>
+                    <td>{{ m[4] }}%</td>
+                    <td>{{ m[5] }}%</td>
+                    <td>{{ m[6] }}</td>
+                    <td>
+                        {% if m[2] == 'image' %}
+                        <img src="{{ url_for('serve_media', file_id=m[0]) }}" class="img-thumbnail" style="width:100px;">
+                        {% elif m[2] == 'video' %}
+                        <video width="150" controls>
+                            <source src="{{ url_for('serve_media', file_id=m[0]) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('serve_media', file_id=m[0]) }}" target="_blank" class="btn btn-sm btn-primary mb-1 w-100">View</a>
+                        <a href="{{ url_for('static', filename='uploads/' + m[1]) }}" download class="btn btn-sm btn-success w-100">Download</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-center mt-4">No media uploaded yet.</p>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-dark btn-lg">Back to Home</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

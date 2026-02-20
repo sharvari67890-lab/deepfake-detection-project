@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - AI SHIELD</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+ <style>
+    body {
+        background-color: #eafaf1;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* HEADER - SAME AS INDEX.HTML */
+    header {
+        background: #c7f9e6;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 1rem 2rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #055c4a;
+    }
+
+    /* FOOTER - EXACT SAME AS INDEX.HTML */
+    footer {
+        text-align: center;
+        padding: 1rem;
+        margin-top: auto;
+        background-color: #055c4a;
+        color: white;
+    }
+
+    .container {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .tab-content {
+        margin-top: 20px;
+    }
+
+    table {
+        background-color: white;
+    }
+
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .verdict-real {
+        color: green;
+        font-weight: bold;
+    }
+
+    .verdict-fake {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand">AI SHIELD - Admin Panel</a>
+
+            <div class="ms-auto">
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+<div class="container">
+
+<!-- NAVIGATION TABS -->
+<ul class="nav nav-tabs justify-content-center mb-3">
+  <li class="nav-item">
+    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#users-tab">Users</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#text-tab">Text History</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#media-tab">Media Uploads</button>
+  </li>
+</ul>
+
+
+<div class="tab-content">
+
+<!-- USERS TABLE -->
+<div class="tab-pane fade show active" id="users-tab">
+    <h4 class="text-center mb-3">Registered Users</h4>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-success">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Admin</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+
+                    <td>
+                        {{ 'Yes' if user[3] == 1 else 'No' }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- TEXT HISTORY TABLE -->
+<div class="tab-pane fade" id="text-tab">
+    <h4 class="text-center mb-3">Text Scan History</h4>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-success">
+                <tr>
+                    <th>ID</th>
+                    <th>User Email</th>
+                    <th>Message</th>
+                    <th>Verdict</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for record in text_history %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+
+                    <!-- MESSAGE WILL SHOW AS 'Hidden for Privacy' -->
+                    <td>{{ record[2] }}</td>
+
+                    <td>
+                        {% if record[3] == 'Real' %}
+                            <span class="verdict-real">{{ record[3] }}</span>
+                        {% else %}
+                            <span class="verdict-fake">{{ record[3] }}</span>
+                        {% endif %}
+                    </td>
+
+                    <td>{{ record[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- MEDIA TABLE -->
+<div class="tab-pane fade" id="media-tab">
+    <h4 class="text-center mb-3">Uploaded Media</h4>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-success">
+                <tr>
+                    <th>ID</th>
+                    <th>Filename</th>
+                    <th>Type</th>
+                    <th>Verdict</th>
+                    <th>Fake Score</th>
+                    <th>Real Score</th>
+                    <th>Upload Time</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in media %}
+                <tr>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[1] }}</td>
+                    <td>{{ item[2] }}</td>
+
+                    <td>
+                        {% if item[3] == 'Real' %}
+                            <span class="verdict-real">{{ item[3] }}</span>
+                        {% else %}
+                            <span class="verdict-fake">{{ item[3] }}</span>
+                        {% endif %}
+                    </td>
+
+                    <td>{{ item[4] }}</td>
+                    <td>{{ item[5] }}</td>
+                    <td>{{ item[6] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2026 AI SHIELD | All Rights Reserved</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

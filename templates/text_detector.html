@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Scam Detector</title>
+</head>
+
+<body>
+
+<h2>AI Scam Text Detector</h2>
+
+<form method="post">
+
+    <textarea name="text" rows="6" cols="60" placeholder="Paste message here..." required></textarea>
+
+    <br><br>
+
+    <button type="submit">Analyze Text</button>
+
+</form>
+
+<br>
+
+{% if result %}
+
+<h3>Result</h3>
+
+<p><b>Verdict:</b> {{ result.verdict }}</p>
+
+<p><b>Fake Score:</b> {{ result.fake }}%</p>
+
+<p><b>Real Score:</b> {{ result.real }}%</p>
+
+<p><b>Reasons:</b></p>
+
+<ul>
+{% for r in result.reasons %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+
+{% endif %}
+
+<br>
+
+<a href="/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

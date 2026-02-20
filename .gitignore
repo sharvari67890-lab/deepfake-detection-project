@@ -1,0 +1,18 @@
+# Database
+*.db
+
+# Upload folders
+uploads/
+static/uploads/
+
+# Dataset
+dataset/
+data/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment
+.env
+.vscode/
